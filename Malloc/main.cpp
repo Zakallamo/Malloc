@@ -7,5 +7,10 @@ int main()
 	// Test that the allocators are creatable
 	delete new StackAllocator();
 	delete new PoolAllocator();
-	delete new OSAllocator();
+	OSAllocator* mall = new OSAllocator();
+	void* test = mall->Allocate<int>();
+	if(test==nullptr)
+		int i = 0;
+	mall->Free(test);
+	delete mall;
 }
