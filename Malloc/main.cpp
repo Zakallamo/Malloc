@@ -1,3 +1,4 @@
+#include "MemoryAllocator.h"
 #include "StackAllocator.h"
 #include "PoolAllocator.h"
 #include "OSAllocator.h"
@@ -5,9 +6,9 @@
 int main()
 {
 	// Test that the allocators are creatable
-	delete new StackAllocator();
-	delete new PoolAllocator();
-	OSAllocator* mall = new OSAllocator();
+	delete new MemoryAllocator<StackAllocator>();
+	delete new MemoryAllocator<PoolAllocator>();
+	MemoryAllocator<OSAllocator>* mall = new MemoryAllocator<OSAllocator>();
 	void* test = mall->Allocate<int>();
 	if(test==nullptr)
 		int i = 0;

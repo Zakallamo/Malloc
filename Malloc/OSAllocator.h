@@ -1,16 +1,15 @@
 #pragma once
-#include "MemoryAllocator.h"
 
 // Passes all the calls through to the OS memory management calls
-class OSAllocator : public MemoryAllocator
+class OSAllocator
 {
 public:
 	void Initialize( uint64_t p_size ) {}
 	void Destroy() {}
 
-	template<class T>
+	template<typename T>
 	void* Allocate( ) { return new T(); }
-	template<class T>
+	template<typename T>
 	void* AllocateAligned( uint8_t p_alignment ) { return Allocate<T>( ); /* ToDo: Implement alignment */ }
 
 	void Free( void* p_pointer ) { delete p_pointer; }
