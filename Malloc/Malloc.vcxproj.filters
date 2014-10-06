@@ -32,5 +32,8 @@
     <ClInclude Include="OSAllocator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TestSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@ public:
 	MemoryAllocator() : isInitialized(false), allocator( new T() ) { }
 	~MemoryAllocator() { delete allocator; }
 
-	void Initialize( uint64_t p_size ) { allocator->Initialize( ); }
+	void Initialize( uint64_t p_size ) { allocator->Initialize( p_size ); }
 	void Destroy() { allocator->Destroy( ); }
 	
 	// Implement a function which checks the type of "this" and call the according function because template and virtual aren't friends
