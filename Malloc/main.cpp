@@ -17,6 +17,6 @@ int main()
 	delete mall;*/
 
 	TestSystem<MemoryAllocator<OSAllocator>> test;
-	test.Initialize(test.SCENARIO1, 10000, 1);
+	test.Initialize(test.SCENARIO2, 10000, 1);
 	test.Run();
 }

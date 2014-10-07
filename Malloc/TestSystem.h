@@ -147,13 +147,43 @@ private:
 
 	void InitializeScenario2( )
 	{
+		memoryList.resize( maxObjects );
+
+		// obtain a time-based seed:
+		//unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+		seed = 1337; // Not so random!
 	}
 	void Scenario2( )
 	{
+		// Allocate memory if needed
+		memoryAllocator->Initialize(1000*sizeof(uint64_t));
 
+		int numObjects = 0;
+		int i = 0, j = 0;
+		for(i = 0; i < frameCount; ++i)
+		{
+			for(j = 0; j < maxObjects * 0.5f; ++j)
+			{
+				// Save the memory addresses to be able to free them later
+				memoryList[j] = (uint64_t)memoryAllocator->Allocate<uint64_t>( );
+				*(uint64_t*)(memoryList[j]) = j;
+			}
+			// Do something with the objects
+			
+			// Shuffle memoryList to free random elements
+			shuffle(memoryList.begin(), memoryList.begin() + j, std::default_random_engine(seed));
+
+			// Free half of the objects
+			for(j = 0; j < maxObjects * 0.5f; ++j)
+			{
+				memoryAllocator->Free( (void*)memoryList[j] );
+				memoryList[j] = 0;
+			}
+		}
 	}
 	void DestroyScenario2( )
 	{
+		memoryList.clear();
 	}
 
 	unsigned seed;
